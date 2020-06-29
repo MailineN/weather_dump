@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:weather_dump/components/card_skeleton.dart';
 import 'package:weather_dump/components/constants.dart';
 import 'package:weather_dump/components/location.dart';
@@ -17,10 +18,10 @@ class _HomePageState extends State<HomePage> {
     getLocation();
     getData();
   }
-
+ 
   void getLocation() async {
     Location location = Location();
-    location.getCurrentLocation();
+    await location.getCurrentLocation();
     print(location.latitude);
     print(location.longitude);
   }
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       print(response.statusCode);
     }
   }
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEAF1FB),
@@ -106,3 +107,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+
