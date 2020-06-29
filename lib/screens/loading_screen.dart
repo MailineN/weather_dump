@@ -5,12 +5,12 @@ import 'package:weather_dump/components/constants.dart';
 import 'package:weather_dump/components/location.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-class LoadingScreen extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _LoadingScreenState createState() => _LoadingScreenState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _LoadingScreenState extends State<LoadingScreen> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -30,6 +30,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=439d4b804bc8187953eb36d2a8c26a02');
     if (response.statusCode == 200) {
       String data = response.body;
+      print(data);
     } else {
       print(response.statusCode);
     }
