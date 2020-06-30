@@ -18,9 +18,9 @@ const kSummaryConditionStyle = TextStyle(
 
 const kTitleNumberStyle = TextStyle(
   color: Colors.white,
-  fontFamily: 'Open',
+  fontFamily: 'Montserrat',
   fontSize: 35.0,
-  fontWeight: FontWeight.bold,
+  fontWeight: FontWeight.w800,
    );
 
 const kLoadingStyle = TextStyle(

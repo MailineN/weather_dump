@@ -48,25 +48,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          DisplayedHead(),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Icon(
-                  Feather.map_pin,
-                  color: kHeaderColor,
-                  size: 20.0,
-                ),
-              ),
-              Text(place.toString(),
-                  style: TextStyle(
-                      color: Color(0xFF252726),
-                      fontFamily: 'Open',
-                      fontSize: 15.0)),
-            ],
-          ),
+          DisplayedHead(name: 'Mailine',location: place,),
           ComponentCard(
             colour: Colors.white,
             cardChild: Column(
