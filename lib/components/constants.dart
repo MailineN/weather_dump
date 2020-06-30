@@ -29,3 +29,5 @@ const kLoadingStyle = TextStyle(
   fontSize: 30.0 );
 
 const kHeaderColor = Color(0xFF4652DA);
+const kBarBottomColor = Color(0xFFFD6060); 
+const kBarTopColor = Color(0xFFFDA7A7);
