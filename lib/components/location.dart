@@ -6,7 +6,7 @@ class Location {
  
   Future<void> getCurrentLocation() async {
     final Geolocator geoLocator = Geolocator()..forceAndroidLocationManager;
-    await geoLocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best).then((Position position) {
+    await geoLocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.low).then((Position position) {
 //      _currentPosition = position;
       latitude = position.latitude;
       longitude = position.longitude;
