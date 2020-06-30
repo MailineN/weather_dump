@@ -13,3 +13,9 @@ const kTitleNumberStyle = TextStyle(
   fontWeight: FontWeight.bold,
    );
 
+const kLoadingStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Montserrat',
+  fontSize: 30.0 );
+
+const kHeaderColor = Color(0xFF4652DA);
