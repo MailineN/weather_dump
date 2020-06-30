@@ -26,7 +26,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     await location.getCurrentLocation();
     lat = location.latitude;
     long = location.longitude;
-    WeatherData weatherData = WeatherData(url : 'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$kApi_key');
+    WeatherData weatherData = WeatherData(url : 'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$kApi_key&units=metric');
       var weatherResult = await weatherData.getData();
     Navigator.push(context, MaterialPageRoute(builder: (context){
       return HomePage(locationWeather: weatherResult,);

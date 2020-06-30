@@ -5,10 +5,9 @@ import 'package:weather_dump/components/constants.dart';
 import 'package:weather_dump/components/location.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 
-
 class HomePage extends StatefulWidget {
-  HomePage({this.locationWeather}); 
-  final locationWeather; 
+  HomePage({this.locationWeather});
+  final locationWeather;
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -16,26 +15,30 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   double temp = 20;
-  int cond = 400;
+  String cond = 'Sunny';
   String place;
   @override
-  void initState(){
+  void initState() {
     super.initState();
     updateWeatherInfo(widget.locationWeather);
   }
-  
-  void updateWeatherInfo(dynamic weatherResult){
-    double temp = weatherResult['main']['temp'];
-    int cond = weatherResult['weather'][0]['id'];
-    String place = weatherResult['name'];
 
+  void updateWeatherInfo(dynamic weatherResult) {
+    setState(() {
+      temp = weatherResult['main']['temp'];
+      cond = weatherResult['weather'][0]['main'];
+      place = weatherResult['name'];
+    });
+
+    print(temp);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFFEAF1FB),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           DisplayedHead(),
           Row(
@@ -72,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                         )),
                     Text(
                       'GLOBAL POLLEN SUMMARY',
-                      style: kSummaryNumberStyle,
+                      style: kSummaryConditionStyle,
                     ),
                   ],
                 ),
@@ -86,8 +89,18 @@ class _HomePageState extends State<HomePage> {
                           size: 35.0,
                         )),
                     SizedBox(width: 15.0),
-                    Text(temp.toString(),
-                      style: kSummaryNumberStyle,
+                    Column(
+                      children: <Widget>[
+                        Text(
+                          '$temp °C',
+                          style: kSummaryNumberStyle,
+                        ),
+                        Text(
+                          '$cond',
+                          style: kSummaryConditionStyle,
+                          textAlign: TextAlign.center,
+                        )
+                      ],
                     ),
                   ],
                 ),
