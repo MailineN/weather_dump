@@ -4,21 +4,32 @@ import 'package:weather_dump/components/card_skeleton.dart';
 import 'package:weather_dump/components/constants.dart';
 import 'package:weather_dump/components/location.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:weather_dump/components/source.dart';
+
 
 class HomePage extends StatefulWidget {
+  HomePage({this.locationWeather}); 
+  final locationWeather; 
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  double temp = 23.3;
-  int cond = 3;
-  String place = 'Bruz';
+  double temp = 20;
+  int cond = 400;
+  String place;
+  @override
+  void initState(){
+    super.initState();
+    updateWeatherInfo(widget.locationWeather);
+  }
+  
+  void updateWeatherInfo(dynamic weatherResult){
+    double temp = weatherResult['main']['temp'];
+    int cond = weatherResult['weather'][0]['id'];
+    String place = weatherResult['name'];
 
-  double lat; 
-  double long; 
-
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,8 +86,7 @@ class _HomePageState extends State<HomePage> {
                           size: 35.0,
                         )),
                     SizedBox(width: 15.0),
-                    Text(
-                      'GLOBAL WEATHER SUMMARY',
+                    Text(temp.toString(),
                       style: kSummaryNumberStyle,
                     ),
                   ],
