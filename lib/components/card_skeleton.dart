@@ -88,3 +88,82 @@ class DisplayedHead extends StatelessWidget {
     );
   }
 }
+
+class SummaryCard extends StatelessWidget {
+  const SummaryCard({
+    Key key,
+    @required this.weaIcon,
+    @required this.temp,
+    @required this.todayMin,
+    @required this.todayMax,
+    @required this.cond,
+  }) : super(key: key);
+
+  final IconData weaIcon;
+  final double temp;
+  final int todayMin;
+  final int todayMax;
+  final String cond;
+
+  @override
+  Widget build(BuildContext context) {
+    return ComponentCard(
+      colour: Colors.white,
+      cardChild: Column(
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Icon(
+                    WeatherIcons.wi_stars,
+                    color: kHeaderColor,
+                    size: 40.0,
+                  )),
+              Text(
+                'GLOBAL POLLEN SUMMARY',
+                style: kSummaryConditionStyle,
+              ),
+            ],
+          ),
+          Row(
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Icon(
+                    weaIcon,
+                    color: kHeaderColor,
+                    size: 35.0,
+                  )),
+              SizedBox(width: 15.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '$temp °C',
+                        style: kSummaryNumberStyle,
+                      ),
+                      SizedBox(width:15.0),
+                      Text(
+                        '($todayMin - $todayMax °C today)',
+                        style: kSummarySecondNumberStyle,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '$cond',
+                    style: kSummaryConditionStyle,
+                    textAlign: TextAlign.left,
+                  )
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 10.0)
+        ],
+      ),
+    );
+  }
+}

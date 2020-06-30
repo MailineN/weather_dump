@@ -3,6 +3,7 @@ import 'package:weather_dump/components/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_dump/components/location.dart';
 import 'package:weather_dump/components/source.dart';
+import 'package:weather_dump/components/weather_icon.dart';
 import 'home_screen.dart';
 const kApi_key = '91e2dc7636f95acddb41f5b7e93b8b8d' ;
 
@@ -20,16 +21,16 @@ class _LoadingScreenState extends State<LoadingScreen> {
     super.initState();
     getLocationData();
   }
- 
-  void getLocationData() async {
+
+    void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
     lat = location.latitude;
     long = location.longitude;
-    WeatherData weatherData = WeatherData(url : 'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$long&appid=$kApi_key&units=metric');
+    WeatherData weatherData = WeatherData(url : 'https://api.openweathermap.org/data/2.5/onecall?lat=$lat&lon=$long&exclude=minutely,hourly&appid=$kApi_key&units=metric');
       var weatherResult = await weatherData.getData();
     Navigator.push(context, MaterialPageRoute(builder: (context){
-      return HomePage(locationWeather: weatherResult,);
+      return HomePage(locationWeather: weatherResult);
     }));
   }
 

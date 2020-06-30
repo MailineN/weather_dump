@@ -1,9 +1,10 @@
-import 'package:flutter/services.dart';
+import 'package:geocoder/geocoder.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_dump/components/card_skeleton.dart';
 import 'package:weather_dump/components/constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:weather_dump/components/weather_icon.dart';
+import 'package:weather_dump/components/prevision_graph.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.locationWeather});
@@ -18,8 +19,8 @@ class _HomePageState extends State<HomePage> {
   String cond;
   String place;
   IconData weaIcon;
-  int min; 
-  int max;
+  int todayMin;
+  int todayMax;
   WeatherClass weather = WeatherClass();
   @override
   void initState() {
@@ -29,16 +30,14 @@ class _HomePageState extends State<HomePage> {
 
   void updateWeatherInfo(dynamic weatherResult) {
     setState(() {
-      temp = weatherResult['main']['temp'];
-      cond = weatherResult['weather'][0]['description'];
-      var iconCode = weatherResult['weather'][0]['id'];
-      place = weatherResult['name'];
-      min = weatherResult['main']['temp_min'].round();
-      max = weatherResult['main']['temp_max'].round();
+      temp = weatherResult['current']['temp'].toDouble();
+      cond = weatherResult['current']['weather'][0]['description'];
+      var iconCode = weatherResult['current']['weather'][0]['id'];
+      place = weatherResult['timezone'];
+      todayMin = weatherResult['daily'][0]['temp']['min'].round();
+      todayMax = weatherResult['daily'][0]['temp']['max'].round();
       weaIcon = weather.getIcon(iconCode);
     });
-
-    print(temp);
   }
 
   @override
@@ -48,65 +47,26 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          DisplayedHead(name: 'Mailine',location: place,),
+          DisplayedHead(
+            name: 'Mailine',
+            location: place,
+          ),
+          SummaryCard(
+              weaIcon: weaIcon,
+              temp: temp,
+              todayMin: todayMin,
+              todayMax: todayMax,
+              cond: cond),
           ComponentCard(
             colour: Colors.white,
             cardChild: Column(
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Icon(
-                          WeatherIcons.wi_stars,
-                          color: kHeaderColor,
-                          size: 40.0,
-                        )),
-                    Text(
-                      'GLOBAL POLLEN SUMMARY',
-                      style: kSummaryConditionStyle,
-                    ),
-                  ],
-                ),
-                Row(
-                  children: <Widget>[
-                    Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Icon(
-                          weaIcon,
-                          color: kHeaderColor,
-                          size: 35.0,
-                        )),
-                    SizedBox(width: 15.0),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Text(
-                              '$temp °C',
-                              style: kSummaryNumberStyle,
-                            ),
-                            SizedBox(width:15.0),
-                            Text(
-                              '($min - $max °C today)',
-                              style: kSummarySecondNumberStyle,
-                            ),
-                          ],
-                        ),
-                        Text(
-                          '$cond',
-                          style: kSummaryConditionStyle,
-                          textAlign: TextAlign.left,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 10.0)
+                Text('Select Pollen or Weather Button', style : kSummaryConditionStyle),
+                Text('Mon Tue Wed Thu Fri Sat Sun', style : kSummaryConditionStyle),
+                ShowGraph(),
               ],
             ),
-          ),
+          )
         ],
       ),
     );
