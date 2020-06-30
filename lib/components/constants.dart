@@ -6,6 +6,11 @@ const kSummaryNumberStyle = TextStyle(
   fontFamily: 'Montserrat',
   fontSize: 35.0 );
 
+const kSummarySecondNumberStyle = TextStyle(
+  color: Color(0xFF8B8C8E),
+  fontFamily: 'Montserrat',
+  fontSize: 17.0 );
+
 const kSummaryConditionStyle = TextStyle(
   color: Color(0xFF8B8C8E),
   fontFamily: 'Montserrat',
