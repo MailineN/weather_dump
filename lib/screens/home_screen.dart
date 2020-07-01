@@ -21,9 +21,7 @@ class _HomePageState extends State<HomePage> {
   IconData weaIcon;
   int todayMin;
   int todayMax;
-  int alertLevel;
-  String alertType = 'Everything seems fine';
-  String plantType;
+  List<Map> pollenPrevision;
   List<Map> futureWeather;
   WeatherClass weather = WeatherClass();
   DateList date = DateList();
@@ -102,12 +100,20 @@ class _HomePageState extends State<HomePage> {
 
   void updatePollenInfo(dynamic pollenResult) {
     setState(() {
-      alertLevel = pollenResult['data'][0]['types']['grass']['index']['value'];
-      plantType = pollenResult['data'][0]['types']['grass']['display_name'];
-      if (alertLevel > 0) {
-        alertType =
-            pollenResult['data'][0]['types']['grass']['index']['category'];
+      pollenPrevision = [
+      {'alertLevel' : pollenResult['data'][0]['types']['grass']['index']['value']??0,
+        'plantType' : pollenResult['data'][0]['types']['grass']['display_name'],
+        'alertType' : pollenResult['data'][0]['types']['grass']['index']['category']??'Not in season',
+      },
+      {'alertLevel' : pollenResult['data'][0]['types']['tree']['index']['value']??0,
+        'plantType' : pollenResult['data'][0]['types']['tree']['display_name'],
+        'alertType' : pollenResult['data'][0]['types']['tree']['index']['category']??'Not in season',
+      },
+      {'alertLevel' : pollenResult['data'][0]['types']['weed']['index']['value']??0,
+        'plantType' : pollenResult['data'][0]['types']['weed']['display_name'],
+        'alertType' : pollenResult['data'][0]['types']['weed']['index']['category']??'Not in season',
       }
+      ];
     });
   }
 
@@ -128,9 +134,9 @@ class _HomePageState extends State<HomePage> {
               todayMin: todayMin,
               todayMax: todayMax,
               cond: cond,
-              alertType: alertType,
-              plantType: plantType,
-              alertLevel: alertLevel),
+              alertType: pollenPrevision[0]['alertType'],
+              plantType: pollenPrevision[0]['plantType'],
+              alertLevel: pollenPrevision[0]['alertLevel']),
           ComponentCard(
             colour: Colors.white,
             cardChild: Column(
@@ -177,6 +183,7 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 10.0),
                 ShowGraph(
                   futureWeather: futureWeather,
+                  pollenResult: pollenPrevision,
                   daylist: dateListe,
                   graphDataType: graphType,
                 ),
