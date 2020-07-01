@@ -22,6 +22,19 @@ const kBarDayStyle = TextStyle(
   fontSize: 15.0,
   fontWeight: FontWeight.bold );
 
+const kPollenQuickStyle = TextStyle(
+  color: Color(0xFF8B8C8E),
+  fontFamily: 'Montserrat',
+  fontSize: 27.0,
+  fontWeight: FontWeight.bold );
+
+const kPollenButtonStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Montserrat',
+  fontSize: 30.0,
+  fontWeight: FontWeight.w500,
+   );
+
 const kButtonStyle = TextStyle(
   color: Color(0xFF8B8C8E),
   fontFamily: 'Montserrat',
