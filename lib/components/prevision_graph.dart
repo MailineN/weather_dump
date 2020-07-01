@@ -202,7 +202,7 @@ class BarPainter extends CustomPainter {
 
     Offset topPoint = Offset(0, 0);
     Offset bottomPoint = Offset(0, 200.0);
-    Offset centralPoint = Offset(0, 150.0);
+    Offset centralPoint = Offset(0, 100.0);
     canvas.drawLine(topPoint, bottomPoint, grey);
 
     Paint filled = Paint()
@@ -212,10 +212,9 @@ class BarPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 7.0;
 
-    Offset filledTopBarHeight = Offset(0, ((max * 100.0) / 40.0));
-    Offset filledBotBarHeight = Offset(0, ((min * 100.0) / 40.0));
-    canvas.drawLine(centralPoint, filledTopBarHeight, filled);
-    canvas.drawLine(filledBotBarHeight, centralPoint, filled);
+    Offset filledTopBarHeight = Offset(0, (((25-max) * 200.0) / 25.0));
+    Offset filledBottomBarHeight = Offset(0, (((25-min) * 200.0) / 25.0)+60);
+    canvas.drawLine(filledBottomBarHeight, filledTopBarHeight, filled);
   }
 
   @override

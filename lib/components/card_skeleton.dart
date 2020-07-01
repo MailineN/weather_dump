@@ -126,25 +126,26 @@ class SummaryCard extends StatelessWidget {
                     color: kHeaderColor,
                     size: 40.0,
                   )),
-              SizedBox(width: 15.0),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
                     children: <Widget>[
                       Text(
-                        '$alertLevel /5',
+                        '$alertLevel/5',
                         style: kSummaryNumberStyle,
                       ),
-                      SizedBox(width:15.0),
+                      SizedBox(width:10.0),
                       Text(
-                        '(For $plantType today)',
+                        '$alertType',
                         style: kSummarySecondNumberStyle,
                       ),
                     ],
                   ),
                   Text(
-                    '$alertType',
+                    '(For type $plantType)',
                     style: kSummaryConditionStyle,
                     textAlign: TextAlign.left,
                   )
