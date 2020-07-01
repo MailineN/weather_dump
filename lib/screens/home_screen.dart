@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:weather_dump/components/card_skeleton.dart';
 import 'package:weather_dump/components/constants.dart';
@@ -22,13 +21,14 @@ class _HomePageState extends State<HomePage> {
   IconData weaIcon;
   int todayMin;
   int todayMax;
-  int alertLevel; 
-  String alertType = 'Everything seems fine'; 
-  String plantType; 
+  int alertLevel;
+  String alertType = 'Everything seems fine';
+  String plantType;
   List<Map> futureWeather;
   WeatherClass weather = WeatherClass();
   DateList date = DateList();
   List<dynamic> dateListe;
+  String graphType = 'Weather';
   @override
   void initState() {
     super.initState();
@@ -37,12 +37,13 @@ class _HomePageState extends State<HomePage> {
     updatePollenInfo(widget.locationPollen);
   }
 
-  void updateDate(dynamic date){
+  void updateDate(dynamic date) {
     setState(() {
       var today = DateTime.now();
-      dateListe= date.getDateList(today);
+      dateListe = date.getDateList(today);
     });
   }
+
   void updateWeatherInfo(dynamic weatherResult) {
     setState(() {
       temp = weatherResult['current']['temp'].toDouble();
@@ -53,50 +54,59 @@ class _HomePageState extends State<HomePage> {
       todayMax = weatherResult['daily'][0]['temp']['max'].round();
       weaIcon = weather.getIcon(iconCode);
       futureWeather = [
-      {
-      'min': weatherResult['daily'][0]['temp']['min'].round(),
-      'max': weatherResult['daily'][0]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][0]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][1]['temp']['min'].round(),
-      'max': weatherResult['daily'][1]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][1]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][2]['temp']['min'].round(),
-      'max': weatherResult['daily'][2]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][2]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][3]['temp']['min'].round(),
-      'max': weatherResult['daily'][3]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][3]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][4]['temp']['min'].round(),
-      'max': weatherResult['daily'][4]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][4]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][5]['temp']['min'].round(),
-      'max': weatherResult['daily'][5]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][5]['weather'][0]['id']),
-      },
-      {
-      'min': weatherResult['daily'][6]['temp']['min'].round(),
-      'max': weatherResult['daily'][6]['temp']['max'].round(), 
-      'icon' : weather.getIcon(weatherResult['daily'][6]['weather'][0]['id']),
-      },
+        {
+          'min': weatherResult['daily'][0]['temp']['min'].round(),
+          'max': weatherResult['daily'][0]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][0]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][1]['temp']['min'].round(),
+          'max': weatherResult['daily'][1]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][1]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][2]['temp']['min'].round(),
+          'max': weatherResult['daily'][2]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][2]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][3]['temp']['min'].round(),
+          'max': weatherResult['daily'][3]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][3]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][4]['temp']['min'].round(),
+          'max': weatherResult['daily'][4]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][4]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][5]['temp']['min'].round(),
+          'max': weatherResult['daily'][5]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][5]['weather'][0]['id']),
+        },
+        {
+          'min': weatherResult['daily'][6]['temp']['min'].round(),
+          'max': weatherResult['daily'][6]['temp']['max'].round(),
+          'icon':
+              weather.getIcon(weatherResult['daily'][6]['weather'][0]['id']),
+        },
       ];
     });
   }
+
   void updatePollenInfo(dynamic pollenResult) {
     setState(() {
-      alertLevel= pollenResult['data'][0]['types']['grass']['index']['value'];
-      plantType= pollenResult['data'][0]['types']['grass']['display_name'];
-      if (alertLevel >0){
-        alertType= pollenResult['data'][0]['types']['grass']['index']['category'];
+      alertLevel = pollenResult['data'][0]['types']['grass']['index']['value'];
+      plantType = pollenResult['data'][0]['types']['grass']['display_name'];
+      if (alertLevel > 0) {
+        alertType =
+            pollenResult['data'][0]['types']['grass']['index']['category'];
       }
     });
   }
@@ -118,17 +128,59 @@ class _HomePageState extends State<HomePage> {
               todayMin: todayMin,
               todayMax: todayMax,
               cond: cond,
-              alertType : alertType, 
-              plantType : plantType, 
-              alertLevel : alertLevel),
+              alertType: alertType,
+              plantType: plantType,
+              alertLevel: alertLevel),
           ComponentCard(
             colour: Colors.white,
             cardChild: Column(
               children: <Widget>[
-                Text('Select Pollen or Weather Button', style : kSummaryConditionStyle),
-                SizedBox(height:10.0),
-                ShowGraph(futureWeather: futureWeather,daylist :dateListe),
-                SizedBox(height:10.0)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(width:10.0),
+                    ButtonTheme(
+                      height: 25.0,
+                      child: FlatButton(
+                        onPressed: () {
+                          if (graphType != 'Weather') {
+                            setState(() {
+                              graphType = 'Weather';
+                            });
+                          }
+                        },
+                        child: Text('Weather',style: kButtonStyle,),
+                        color: Color(0xFFEAF1FB),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                      ),
+                    ),
+                    SizedBox(width:7.0),
+                    ButtonTheme(
+                      height: 25.0,
+                      child: FlatButton(
+                        onPressed: () {
+                          if (graphType != 'Pollen') {
+                            setState(() {
+                              graphType = 'Pollen';
+                            });
+                          }
+                        },
+                        child: Text('Pollen',style: kButtonStyle,),
+                        color: Color(0xFFEAF1FB),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15.0)),
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 10.0),
+                ShowGraph(
+                  futureWeather: futureWeather,
+                  daylist: dateListe,
+                  graphDataType: graphType,
+                ),
+                SizedBox(height: 10.0)
               ],
             ),
           )

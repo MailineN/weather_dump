@@ -3,9 +3,7 @@ import 'package:weather_dump/screens/loading_screen.dart';
 import 'package:flutter/services.dart';
 
 void main() { 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: Colors.transparent,
-  ));
+  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MyApp());
   }
 class MyApp extends StatelessWidget {

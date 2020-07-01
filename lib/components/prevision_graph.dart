@@ -5,7 +5,7 @@ class Graph extends StatelessWidget {
   final List<Map> futureWeather;
   final List<dynamic> daylist;
   final AnimationController animationController;
-  Graph({this.futureWeather, this.animationController,this.daylist});
+  Graph({this.futureWeather, this.animationController, this.daylist});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class Graph extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
-              Text(daylist[0],style:kBarDayStyle),
+              Text(daylist[0], style: kBarDayStyle),
               Text(
                 futureWeather[0]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -37,7 +37,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[1],style:kBarDayStyle),
+              Text(daylist[1], style: kBarDayStyle),
               Text(
                 futureWeather[1]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -59,7 +59,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[2],style:kBarDayStyle),
+              Text(daylist[2], style: kBarDayStyle),
               Text(
                 futureWeather[2]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -81,7 +81,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[3],style:kBarDayStyle),
+              Text(daylist[3], style: kBarDayStyle),
               Text(
                 futureWeather[3]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -103,7 +103,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[4],style:kBarDayStyle),
+              Text(daylist[4], style: kBarDayStyle),
               Text(
                 futureWeather[4]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -125,7 +125,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[5],style:kBarDayStyle),
+              Text(daylist[5], style: kBarDayStyle),
               Text(
                 futureWeather[5]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -147,7 +147,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
-              Text(daylist[6],style:kBarDayStyle),
+              Text(daylist[6], style: kBarDayStyle),
               Text(
                 futureWeather[6]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -216,12 +216,14 @@ class BarPainter extends CustomPainter {
     Paint filled = Paint()
       ..shader = LinearGradient(
         colors: [kBarTopColor, kBarBottomColor],
+        begin: Alignment.topCenter
       ).createShader(Rect.fromPoints(topPoint, bottomPoint))
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 7.0;
 
-    Offset filledTopBarHeight = Offset(0, (((25-max) * 200.0) / 25.0));
-    Offset filledBottomBarHeight = Offset(0, (((25-min) * 200.0) / 25.0)+60);
+    Offset filledTopBarHeight = Offset(0, (((25 - max) * 200.0) / 25.0));
+    Offset filledBottomBarHeight =
+        Offset(0, (((25 - min) * 200.0) / 25.0) + 60);
     canvas.drawLine(filledBottomBarHeight, filledTopBarHeight, filled);
   }
 
@@ -232,7 +234,8 @@ class BarPainter extends CustomPainter {
 class ShowGraph extends StatefulWidget {
   final List<Map> futureWeather;
   final List<dynamic> daylist;
-  ShowGraph({this.futureWeather,this.daylist});
+  final String graphDataType;
+  ShowGraph({this.futureWeather, this.daylist, this.graphDataType});
 
   @override
   _ShowGraphState createState() => _ShowGraphState();
@@ -252,19 +255,30 @@ class _ShowGraphState extends State<ShowGraph>
     _graphAnimationController.dispose();
   }
 
+  Widget selectGraph() {
+    if (widget.graphDataType == 'Weather') {
+      return Graph(
+          animationController: _graphAnimationController,
+          futureWeather: widget.futureWeather,
+          daylist: widget.daylist);
+    } else {
+      return Container(
+        child: Text('Mettre des informations supplémentaires sur le pollen'),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 300.0,
       alignment: Alignment.center,
       child: InkWell(
-          onTap: () {
-            _graphAnimationController.forward();
-          },
-          child: Graph(
-              animationController: _graphAnimationController,
-              futureWeather: widget.futureWeather,
-              daylist: widget.daylist)),
+        onTap: () {
+          _graphAnimationController.forward();
+        },
+        child: selectGraph(),
+      ),
     );
   }
 }
