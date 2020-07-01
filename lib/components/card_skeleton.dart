@@ -97,6 +97,9 @@ class SummaryCard extends StatelessWidget {
     @required this.todayMin,
     @required this.todayMax,
     @required this.cond,
+    @required this.alertLevel,
+    @required this.alertType,
+    @required this.plantType,
   }) : super(key: key);
 
   final IconData weaIcon;
@@ -104,6 +107,9 @@ class SummaryCard extends StatelessWidget {
   final int todayMin;
   final int todayMax;
   final String cond;
+  final int alertLevel;
+  final String alertType;
+  final String plantType;
 
   @override
   Widget build(BuildContext context) {
@@ -120,9 +126,29 @@ class SummaryCard extends StatelessWidget {
                     color: kHeaderColor,
                     size: 40.0,
                   )),
-              Text(
-                'GLOBAL POLLEN SUMMARY',
-                style: kSummaryConditionStyle,
+              SizedBox(width: 15.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        '$alertLevel /5',
+                        style: kSummaryNumberStyle,
+                      ),
+                      SizedBox(width:15.0),
+                      Text(
+                        '(For $plantType today)',
+                        style: kSummarySecondNumberStyle,
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '$alertType',
+                    style: kSummaryConditionStyle,
+                    textAlign: TextAlign.left,
+                  )
+                ],
               ),
             ],
           ),

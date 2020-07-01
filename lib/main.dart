@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_dump/screens/loading_screen.dart';
 import 'package:flutter/services.dart';
-import 'package:weather_dump/screens/home_screen.dart';
 
 void main() { 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
