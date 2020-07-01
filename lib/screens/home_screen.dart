@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_dump/components/card_skeleton.dart';
 import 'package:weather_dump/components/constants.dart';
+import 'package:weather_dump/components/date.dart';
 import 'package:weather_dump/components/weather_icon.dart';
 import 'package:weather_dump/components/prevision_graph.dart';
 
@@ -26,13 +27,22 @@ class _HomePageState extends State<HomePage> {
   String plantType; 
   List<Map> futureWeather;
   WeatherClass weather = WeatherClass();
+  DateList date = DateList();
+  List<dynamic> dateListe;
   @override
   void initState() {
     super.initState();
+    updateDate(date);
     updateWeatherInfo(widget.locationWeather);
     updatePollenInfo(widget.locationPollen);
   }
 
+  void updateDate(dynamic date){
+    setState(() {
+      var today = DateTime.now();
+      dateListe= date.getDateList(today);
+    });
+  }
   void updateWeatherInfo(dynamic weatherResult) {
     setState(() {
       temp = weatherResult['current']['temp'].toDouble();
@@ -81,13 +91,14 @@ class _HomePageState extends State<HomePage> {
       ];
     });
   }
-
   void updatePollenInfo(dynamic pollenResult) {
-    alertLevel= pollenResult['data'][0]['types']['grass']['index']['value'];
-    plantType= pollenResult['data'][0]['types']['grass']['display_name'];
-    if (alertLevel >0){
+    setState(() {
+      alertLevel= pollenResult['data'][0]['types']['grass']['index']['value'];
+      plantType= pollenResult['data'][0]['types']['grass']['display_name'];
+      if (alertLevel >0){
         alertType= pollenResult['data'][0]['types']['grass']['index']['category'];
-    }
+      }
+    });
   }
 
   @override
@@ -115,9 +126,9 @@ class _HomePageState extends State<HomePage> {
             cardChild: Column(
               children: <Widget>[
                 Text('Select Pollen or Weather Button', style : kSummaryConditionStyle),
-                Text('Insert Future Days', style : kSummaryConditionStyle),
-                SizedBox(height:15.0),
-                ShowGraph(futureWeather: futureWeather),
+                SizedBox(height:10.0),
+                ShowGraph(futureWeather: futureWeather,daylist :dateListe),
+                SizedBox(height:10.0)
               ],
             ),
           )

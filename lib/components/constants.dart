@@ -16,6 +16,12 @@ const kSummaryConditionStyle = TextStyle(
   fontFamily: 'Montserrat',
   fontSize: 15.0 );
 
+const kBarDayStyle = TextStyle(
+  color: Color(0xFF8B8C8E),
+  fontFamily: 'Montserrat',
+  fontSize: 15.0,
+  fontWeight: FontWeight.bold );
+
 const kTitleNumberStyle = TextStyle(
   color: Colors.white,
   fontFamily: 'Montserrat',

@@ -3,8 +3,9 @@ import 'constants.dart';
 
 class Graph extends StatelessWidget {
   final List<Map> futureWeather;
+  final List<dynamic> daylist;
   final AnimationController animationController;
-  Graph({this.futureWeather, this.animationController});
+  Graph({this.futureWeather, this.animationController,this.daylist});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class Graph extends StatelessWidget {
         children: <Widget>[
           Column(
             children: <Widget>[
+              Text(daylist[0],style:kBarDayStyle),
               Text(
                 futureWeather[0]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -35,6 +37,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[1],style:kBarDayStyle),
               Text(
                 futureWeather[1]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -56,6 +59,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[2],style:kBarDayStyle),
               Text(
                 futureWeather[2]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -77,6 +81,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[3],style:kBarDayStyle),
               Text(
                 futureWeather[3]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -98,6 +103,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[4],style:kBarDayStyle),
               Text(
                 futureWeather[4]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -119,6 +125,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[5],style:kBarDayStyle),
               Text(
                 futureWeather[5]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -140,6 +147,7 @@ class Graph extends StatelessWidget {
           ),
           Column(
             children: <Widget>[
+              Text(daylist[6],style:kBarDayStyle),
               Text(
                 futureWeather[6]['max'].toString() + '°C',
                 style: kSummaryConditionStyle,
@@ -223,7 +231,8 @@ class BarPainter extends CustomPainter {
 
 class ShowGraph extends StatefulWidget {
   final List<Map> futureWeather;
-  ShowGraph({this.futureWeather});
+  final List<dynamic> daylist;
+  ShowGraph({this.futureWeather,this.daylist});
 
   @override
   _ShowGraphState createState() => _ShowGraphState();
@@ -254,7 +263,8 @@ class _ShowGraphState extends State<ShowGraph>
           },
           child: Graph(
               animationController: _graphAnimationController,
-              futureWeather: widget.futureWeather)),
+              futureWeather: widget.futureWeather,
+              daylist: widget.daylist)),
     );
   }
 }
