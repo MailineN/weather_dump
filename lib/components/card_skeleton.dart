@@ -55,7 +55,7 @@ class DisplayedHead extends StatelessWidget {
       //TODO : Add complex form (REDO the shape of it)
       cardChild: Column(
         children: <Widget>[
-          SizedBox(height: 40.0),
+          SizedBox(height: 20.0),
           Container(
               margin: EdgeInsets.all(10.0),
               child: Text(

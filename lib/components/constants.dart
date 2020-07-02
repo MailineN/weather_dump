@@ -1,6 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+
+const kTitleNumberStyle = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Montserrat',
+  fontSize:35.0,
+  fontWeight: FontWeight.w800,
+   );
+
 const kSummaryNumberStyle = TextStyle(
   color: Color(0xFF252726),
   fontFamily: 'Montserrat',
@@ -41,12 +49,6 @@ const kButtonStyle = TextStyle(
   fontSize: 13.0,
   fontWeight: FontWeight.bold );
 
-const kTitleNumberStyle = TextStyle(
-  color: Colors.white,
-  fontFamily: 'Montserrat',
-  fontSize: 35.0,
-  fontWeight: FontWeight.w800,
-   );
 
 const kLoadingStyle = TextStyle(
   color: Colors.white,

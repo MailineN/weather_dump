@@ -4,6 +4,7 @@ import 'package:weather_dump/components/constants.dart';
 import 'package:weather_dump/components/date.dart';
 import 'package:weather_dump/components/weather_icon.dart';
 import 'package:weather_dump/components/prevision_graph.dart';
+import 'package:weather_dump/components/utilities/widget_size.dart';
 
 class HomePage extends StatefulWidget {
   HomePage({this.locationWeather, this.locationPollen});
@@ -25,6 +26,7 @@ class _HomePageState extends State<HomePage> {
   List<Map> futureWeather;
   WeatherClass weather = WeatherClass();
   DateList date = DateList();
+  WidgetSize widgetSize = WidgetSize();
   List<dynamic> dateListe;
   String graphType = 'Weather';
   @override
