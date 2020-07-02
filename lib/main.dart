@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weather_dump/screens/loading_screen.dart';
 import 'package:flutter/services.dart';
 
-void main() { 
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
   runApp(MyApp());
   }
