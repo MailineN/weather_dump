@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_dump/components/utilities/widget_size.dart';
 import 'constants.dart';
 
 import 'package:flutter_icons/flutter_icons.dart';
@@ -28,7 +29,11 @@ class PollenInfo extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Grass (graminales) : All year long',
-                    style: kBarDayStyle,
+                    style: TextStyle(
+                        color: Color(0xFF8B8C8E),
+                        fontFamily: 'Montserrat',
+                        fontSize: SizeConfig.blockSizeHorizontal*3.4,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${pollenResult[0]['alertLevel']} /5, ${pollenResult[0]['alertType']} risk',
@@ -53,7 +58,11 @@ class PollenInfo extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Trees (various species): January to April',
-                    style: kBarDayStyle,
+                    style: TextStyle(
+                        color: Color(0xFF8B8C8E),
+                        fontFamily: 'Montserrat',
+                        fontSize: SizeConfig.blockSizeHorizontal*3.4,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${pollenResult[1]['alertLevel']} /5, ${pollenResult[1]['alertType']}',
@@ -78,7 +87,11 @@ class PollenInfo extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     'Weed (urban species) : August to September',
-                    style: kBarDayStyle,
+                    style: TextStyle(
+                        color: Color(0xFF8B8C8E),
+                        fontFamily: 'Montserrat',
+                        fontSize: SizeConfig.blockSizeHorizontal*3.4,
+                        fontWeight: FontWeight.bold),
                   ),
                   Text(
                     '${pollenResult[2]['alertLevel']} /5, ${pollenResult[2]['alertType']}',
@@ -99,7 +112,7 @@ class PollenInfo extends StatelessWidget {
               ),
               color: kHeaderColor,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0)),
+                  borderRadius: BorderRadius.circular(SizeConfig.blockSizeHorizontal*3.4)),
             ),
           )
         ],

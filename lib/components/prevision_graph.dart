@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_dump/components/pollen_graph.dart';
-import 'constants.dart';
+import 'package:weather_dump/components/utilities/widget_size.dart';
 import 'graph_weather.dart';
 
 
@@ -44,8 +44,9 @@ class _ShowGraphState extends State<ShowGraph>
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
-      height: 300.0,
+      height: SizeConfig.blockSizeVertical*43,
       alignment: Alignment.center,
       child: InkWell(
         onTap: () {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'package:weather_dump/components/utilities/widget_size.dart';
 
 class Graph extends StatelessWidget {
   final List<Map> futureWeather;
@@ -27,7 +28,7 @@ class Graph extends StatelessWidget {
                 futureWeather[0]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[0]['icon'],
                 color: kHeaderColor,
@@ -49,7 +50,7 @@ class Graph extends StatelessWidget {
                 futureWeather[1]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[1]['icon'],
                 color: kHeaderColor,
@@ -71,7 +72,7 @@ class Graph extends StatelessWidget {
                 futureWeather[2]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[2]['icon'],
                 color: kHeaderColor,
@@ -93,7 +94,7 @@ class Graph extends StatelessWidget {
                 futureWeather[3]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[3]['icon'],
                 color: kHeaderColor,
@@ -115,7 +116,7 @@ class Graph extends StatelessWidget {
                 futureWeather[4]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[4]['icon'],
                 color: kHeaderColor,
@@ -137,7 +138,7 @@ class Graph extends StatelessWidget {
                 futureWeather[5]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[5]['icon'],
                 color: kHeaderColor,
@@ -159,7 +160,7 @@ class Graph extends StatelessWidget {
                 futureWeather[6]['min'].toString() + '°C',
                 style: kSummaryConditionStyle,
               ),
-              SizedBox(height: 5.0),
+              SizedBox(height: SizeConfig.blockSizeVertical*1),
               Icon(
                 futureWeather[6]['icon'],
                 color: kHeaderColor,
@@ -184,12 +185,13 @@ class Bar extends StatefulWidget {
 class _BarState extends State<Bar> {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return CustomPaint(
       painter: BarPainter(max: widget.max, min: widget.min),
       child: Column(
         children: <Widget>[
           Container(
-            height: 200.0,
+            height: SizeConfig.blockSizeVertical*27,
           ),
         ],
       ),
@@ -209,8 +211,7 @@ class BarPainter extends CustomPainter {
       ..strokeWidth = 7.0;
 
     Offset topPoint = Offset(0, 0);
-    Offset bottomPoint = Offset(0, 200.0);
-    Offset centralPoint = Offset(0, 100.0);
+    Offset bottomPoint = Offset(0, SizeConfig.blockSizeVertical*27);
     canvas.drawLine(topPoint, bottomPoint, grey);
 
     Paint filled = Paint()
@@ -221,9 +222,9 @@ class BarPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..strokeWidth = 7.0;
 
-    Offset filledTopBarHeight = Offset(0, (((25 - max) * 200.0) / 25.0));
+    Offset filledTopBarHeight = Offset(0, (((25 - max) * SizeConfig.blockSizeVertical*27) / 25.0));
     Offset filledBottomBarHeight =
-        Offset(0, (((25 - min) * 200.0) / 25.0) + 60);
+        Offset(0, (((25 - min) * SizeConfig.blockSizeVertical*27) / 25.0) + 60);
     canvas.drawLine(filledBottomBarHeight, filledTopBarHeight, filled);
   }
 

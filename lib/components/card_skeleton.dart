@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:weather_dump/components/utilities/widget_size.dart';
 
 class ComponentCard extends StatelessWidget {
   ComponentCard({@required this.colour, this.cardChild});
@@ -51,18 +52,19 @@ class DisplayedHead extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return HeadCard(
       //TODO : Add complex form (REDO the shape of it)
       cardChild: Column(
         children: <Widget>[
-          SizedBox(height: 20.0),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3),
           Container(
-              margin: EdgeInsets.all(10.0),
               child: Text(
-                'Hello $name',
-                style: kTitleNumberStyle,
-                textAlign: TextAlign.center,
-              )),
+            'Hello $name',
+            style: kTitleNumberStyle,
+            textAlign: TextAlign.center,
+          )),
+          SizedBox(height: SizeConfig.blockSizeVertical * 1),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -71,18 +73,18 @@ class DisplayedHead extends StatelessWidget {
                 child: Icon(
                   Feather.map_pin,
                   color: Colors.white,
-                  size: 20.0,
+                  size: SizeConfig.blockSizeHorizontal * 2.5,
                 ),
               ),
               Text('$location',
                   style: TextStyle(
                     color: Colors.white,
                     fontFamily: 'Open',
-                    fontSize: 15.0,
+                    fontSize: SizeConfig.blockSizeHorizontal * 5,
                   )),
             ],
           ),
-          SizedBox(height: 20.0),
+          SizedBox(height: SizeConfig.blockSizeVertical * 3),
         ],
       ),
     );
@@ -113,14 +115,16 @@ class SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return ComponentCard(
       colour: Colors.white,
       cardChild: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Row(
             children: <Widget>[
               Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: const EdgeInsets.all((15)),
                   child: Icon(
                     WeatherIcons.wi_stars,
                     color: kHeaderColor,
@@ -135,12 +139,18 @@ class SummaryCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         '$alertLevel/5',
-                        style: kSummaryNumberStyle,
+                        style: TextStyle(
+                            color: Color(0xFF252726),
+                            fontFamily: 'Montserrat',
+                            fontSize: SizeConfig.blockSizeHorizontal * 7.3),
                       ),
-                      SizedBox(width:10.0),
+                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
                       Text(
                         '$alertType',
-                        style: kSummarySecondNumberStyle,
+                        style: TextStyle(
+                            color: Color(0xFF8B8C8E),
+                            fontFamily: 'Montserrat',
+                            fontSize: SizeConfig.blockSizeHorizontal * 4),
                       ),
                     ],
                   ),
@@ -162,7 +172,7 @@ class SummaryCard extends StatelessWidget {
                     color: kHeaderColor,
                     size: 35.0,
                   )),
-              SizedBox(width: 15.0),
+              SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -170,12 +180,18 @@ class SummaryCard extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         '$temp °C',
-                        style: kSummaryNumberStyle,
+                        style: TextStyle(
+                            color: Color(0xFF252726),
+                            fontFamily: 'Montserrat',
+                            fontSize: SizeConfig.blockSizeHorizontal * 7.3),
                       ),
-                      SizedBox(width:15.0),
+                      SizedBox(width: SizeConfig.blockSizeHorizontal * 2),
                       Text(
                         '($todayMin - $todayMax °C today)',
-                        style: kSummarySecondNumberStyle,
+                        style: TextStyle(
+                            color: Color(0xFF8B8C8E),
+                            fontFamily: 'Montserrat',
+                            fontSize: SizeConfig.blockSizeHorizontal * 4),
                       ),
                     ],
                   ),
@@ -188,7 +204,7 @@ class SummaryCard extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: 10.0)
+          SizedBox(height: SizeConfig.blockSizeVertical * 1.7)
         ],
       ),
     );

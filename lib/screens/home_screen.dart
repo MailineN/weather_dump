@@ -26,7 +26,6 @@ class _HomePageState extends State<HomePage> {
   List<Map> futureWeather;
   WeatherClass weather = WeatherClass();
   DateList date = DateList();
-  WidgetSize widgetSize = WidgetSize();
   List<dynamic> dateListe;
   String graphType = 'Weather';
   @override
@@ -121,6 +120,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       backgroundColor: Color(0xFFEAF1FB),
       body: Column(
@@ -146,9 +146,9 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(width:10.0),
+                    SizedBox(width:SizeConfig.blockSizeHorizontal*2),
                     ButtonTheme(
-                      height: 25.0,
+                      height: SizeConfig.blockSizeVertical*3.7,
                       child: FlatButton(
                         onPressed: () {
                           if (graphType != 'Weather') {
@@ -163,9 +163,9 @@ class _HomePageState extends State<HomePage> {
                             borderRadius: BorderRadius.circular(15.0)),
                       ),
                     ),
-                    SizedBox(width:7.0),
+                    SizedBox(width:SizeConfig.blockSizeHorizontal*2),
                     ButtonTheme(
-                      height: 25.0,
+                      height: SizeConfig.blockSizeVertical*3.7,
                       child: FlatButton(
                         onPressed: () {
                           if (graphType != 'Pollen') {
@@ -182,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                     )
                   ],
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(height: 15.0),
                 ShowGraph(
                   futureWeather: futureWeather,
                   pollenResult: pollenPrevision,
